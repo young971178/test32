@@ -1,9 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import {
   RefreshCw,
   Mail,
-  CheckSquare,
-  Square,
   AlertTriangle,
   CheckCircle2,
   XCircle,
@@ -11,22 +9,13 @@ import {
   Users,
   Award,
   Search,
-  Filter,
   ChevronRight,
   Clock,
   Edit3,
   Send,
   History,
   X,
-  Building2,
-  ChevronDown,
-  ChevronUp,
-  ArrowUpDown,
-  Info,
-  Sparkles,
-  ExternalLink,
-  ShieldAlert,
-  Calendar
+  ShieldAlert
 } from 'lucide-react';
 
 // ==========================================
@@ -168,7 +157,7 @@ const MONTHLY_TREND_DATA = [
 
 export default function App() {
   // Master Members State (parsed from packed data)
-  const [members, setMembers] = useState<MemberProcess[]>(() => {
+  const [members] = useState<MemberProcess[]>(() => {
     return PACKED_MEMBERS_DATA.map((line) => {
       const parts = line.split('|');
       const id = parts[0];
@@ -215,7 +204,7 @@ export default function App() {
 
   // Search & Filter state for Members
   const [memberSearch, setMemberSearch] = useState('');
-  const [filterOrg, setFilterOrg] = useState('ALL');
+  const [filterOrg] = useState('ALL');
   const [filterRank, setFilterRank] = useState<'ALL' | 'G1' | 'G2' | 'G3'>('ALL');
   const [filterStatus, setFilterStatus] = useState<'ALL' | 'UNFULFILLED' | 'FULFILLED'>('ALL');
   const [memberPage, setMemberPage] = useState(1);
@@ -390,9 +379,7 @@ export default function App() {
   }, [filteredMembers, memberPage]);
 
   // Unique Orgs for filter dropdown
-  const uniqueOrgs = useMemo(() => {
-    return Array.from(new Set(members.map((m) => m.org))).sort();
-  }, [members]);
+
 
   // ==========================================
   // 4. SELECTION HANDLERS
